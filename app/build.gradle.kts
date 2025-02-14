@@ -46,6 +46,9 @@ dependencies {
 
     //Kotlin coroutines
     implementation(libs.kotlinx.coroutines.core)
+    
+    //Koin
+    implementation(libs.koin.core)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
