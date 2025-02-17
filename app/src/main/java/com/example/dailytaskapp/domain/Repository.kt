@@ -1,10 +1,11 @@
 package com.example.dailytaskapp.domain
 
 import com.example.dailytaskapp.domain.model.Task
+import kotlinx.coroutines.flow.Flow
 
 interface Repository {
-    suspend fun getTask(): Task
     suspend fun openSelectedTask(id: String): Task
-    suspend fun getTasks(): List<Task>
+    fun getTasks(): Flow<List<Task>>
     suspend fun createTask(task: Task): Task
+    suspend fun updateTask(task: Task)
 }

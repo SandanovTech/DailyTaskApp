@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dailytaskapp.databinding.TaskCardBinding
 import com.example.dailytaskapp.domain.model.Task
 
-class TaskAdapter : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallback()) {
+class TaskAdapter(
+    private val onTaskClick: (String) -> Unit,
+) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallback()) {
 
     inner class TaskViewHolder(private val binding: TaskCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -15,6 +17,9 @@ class TaskAdapter : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallba
             binding.title.text = item.title
             binding.description.text = item.description
             binding.createdTime.text = item.data
+            binding.root.setOnClickListener {
+                onTaskClick(item.id)
+            }
         }
     }
 

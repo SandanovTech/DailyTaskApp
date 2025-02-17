@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dailytaskapp.R
 import com.example.dailytaskapp.databinding.FragmentMainBinding
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 
@@ -38,7 +39,15 @@ class MainFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        taskAdapter = TaskAdapter()
+        taskAdapter = TaskAdapter {
+            val action = MainFragmentDirections.actionMainFragmentToSelectedTaskFragment(it)
+            findNavController().navigate(action)
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getTasks().collect {
+                taskAdapter.submitList(it)
+            }
+        }
         taskRecyclerView = binding.tasksRv
         taskRecyclerView.adapter = taskAdapter
         taskRecyclerView.layoutManager = LinearLayoutManager(requireContext())
