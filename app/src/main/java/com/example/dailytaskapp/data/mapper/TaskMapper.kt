@@ -3,20 +3,19 @@ package com.example.dailytaskapp.data.mapper
 import com.example.dailytaskapp.data.model.TaskEntity
 import com.example.dailytaskapp.domain.model.Task
 
-object TaskMapper {
-    fun mapToDomain(entity: TaskEntity): Task {
-        return Task(entity.id, entity.title, entity.description, entity.data)
-    }
 
-    fun mapToDomainList(entities: List<TaskEntity>): List<Task> {
-        return entities.map { mapToDomain(it) }
-    }
+fun TaskEntity.mapToDomain(): Task {
+    return Task(this.id, this.title, this.description, this.data)
+}
 
-    fun mapToEntityList(tasks: List<Task>): List<TaskEntity> {
-        return tasks.map { mapToEntity(it) }
-    }
+fun Task.mapToEntity(): TaskEntity {
+    return TaskEntity(this.id, this.title, this.description, this.data)
+}
 
-    fun mapToEntity(task: Task): TaskEntity {
-        return TaskEntity(task.id, task.title, task.description, task.data)
-    }
+fun List<TaskEntity>.mapToDomainList(): List<Task> {
+    return this.map { it.mapToDomain() }
+}
+
+fun List<Task>.mapToEntityList(): List<TaskEntity> {
+    return this.map { it.mapToEntity() }
 }
