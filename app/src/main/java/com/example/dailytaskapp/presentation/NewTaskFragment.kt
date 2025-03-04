@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.viewModelScope
 import com.example.dailytaskapp.databinding.FragmentNewTaskBinding
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDateTime
 
@@ -27,15 +25,15 @@ class NewTaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val currentTime = LocalDateTime.now()
+        val label = binding.label.text
+        val description = binding.description.text
         binding.saveBtn.setOnClickListener {
-            if (binding.label.text.isNotBlank() && binding.inputText.text.isNotBlank()) {
-                viewModel.viewModelScope.launch {
-                    viewModel.createTask(
-                        binding.label.text.toString(),
-                        binding.inputText.text.toString(),
-                        currentTime.toString()
-                    )
-                }
+            if (label.isNotBlank() && description.isNotBlank()) {
+                viewModel.createTask(
+                    label.toString(),
+                    description.toString(),
+                    currentTime
+                )
             }
         }
     }

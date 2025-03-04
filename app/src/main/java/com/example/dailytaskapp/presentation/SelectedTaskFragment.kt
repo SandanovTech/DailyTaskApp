@@ -37,11 +37,9 @@ class SelectedTaskFragment : Fragment() {
                 val updatedTask = task.copy(
                     title = binding.label.text.toString(),
                     description = binding.inputText.text.toString(),
-                    data = LocalDateTime.now().toString()
+                    data = LocalDateTime.now()
                 )
-                viewLifecycleOwner.lifecycleScope.launch {
-                    viewModel.updateCurrentTask(updatedTask)
-                }
+                viewModel.updateCurrentTask(updatedTask)
             }
         }
     }

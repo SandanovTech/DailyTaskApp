@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dailytaskapp.databinding.TaskCardBinding
 import com.example.dailytaskapp.domain.model.Task
+import java.time.format.DateTimeFormatter
 
 class TaskAdapter(
     private val onTaskClick: (String) -> Unit,
@@ -14,9 +15,9 @@ class TaskAdapter(
     inner class TaskViewHolder(private val binding: TaskCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Task) {
+            val formatter = DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mm")
             binding.title.text = item.title
-            binding.description.text = item.description
-            binding.createdTime.text = item.data
+            binding.createdTime.text = item.data.format(formatter)
             binding.root.setOnClickListener {
                 onTaskClick(item.id)
             }

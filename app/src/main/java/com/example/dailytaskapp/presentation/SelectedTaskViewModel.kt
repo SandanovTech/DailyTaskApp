@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.dailytaskapp.domain.model.Task
 import com.example.dailytaskapp.domain.usecases.GetSelectedTaskUseCase
 import com.example.dailytaskapp.domain.usecases.SaveCurrentTaskUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
@@ -25,7 +26,9 @@ class SelectedTaskViewModel(
         }
     }
 
-    suspend fun updateCurrentTask(task: Task) {
-        saveCurrentTaskUseCase.saveCurrentTask(task)
+    fun updateCurrentTask(task: Task) {
+        viewModelScope.launch(Dispatchers.IO) {
+            saveCurrentTaskUseCase.saveCurrentTask(task)
+        }
     }
 }
