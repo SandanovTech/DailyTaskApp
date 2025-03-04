@@ -9,32 +9,22 @@
         android:id="@+id/mainFragment"
         android:name="com.example.dailytaskapp.presentation.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_newTaskFragment"
-            app:destination="@id/newTaskFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_selectedTaskFragment"
-            app:destination="@id/selectedTaskFragment">
+            android:id="@+id/action_mainFragment_to_taskFragment"
+            app:destination="@id/taskFragment">
             <argument
                 android:name="taskId"
-                app:argType="string" />
+                app:argType="string"
+                app:nullable="true" />
         </action>
 
     </fragment>
     <fragment
-        android:id="@+id/newTaskFragment"
-        android:name="com.example.dailytaskapp.presentation.NewTaskFragment"
+        android:id="@+id/taskFragment"
+        android:name="com.example.dailytaskapp.presentation.TaskFragment"
         android:label="fragment_new_task"
-        tools:layout="@layout/fragment_new_task" >
-    </fragment>
-    <fragment
-        android:id="@+id/selectedTaskFragment"
-        android:name="com.example.dailytaskapp.presentation.SelectedTaskFragment"
-        android:label="fragment_selected_task"
-        tools:layout="@layout/fragment_selected_task">
-        <argument
-            android:name="taskId"
-            app:argType="string" />
+        tools:layout="@layout/fragment_task">
+
     </fragment>
 </navigation>

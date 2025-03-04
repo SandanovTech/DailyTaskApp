@@ -1,12 +1,10 @@
 package com.example.dailytaskapp.di
 
 import com.example.dailytaskapp.presentation.MainViewModel
-import com.example.dailytaskapp.presentation.NewTaskViewModel
-import com.example.dailytaskapp.presentation.SelectedTaskViewModel
+import com.example.dailytaskapp.presentation.TaskViewModel
 import org.koin.dsl.module
 
 val presentationModule = module {
-    single { NewTaskViewModel(get()) }
+    single { TaskViewModel(get(),get(),get()) }
     single { MainViewModel(get()) }
-    single { SelectedTaskViewModel(get(), get()) }
 }

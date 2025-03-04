@@ -32,15 +32,19 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupFloatingActionBtn()
+    }
+
+    private fun setupFloatingActionBtn() {
         binding.floatingActionButton.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToNewTaskFragment()
+            val action = MainFragmentDirections.actionMainFragmentToTaskFragment(null)
             findNavController().navigate(action)
         }
     }
 
     private fun setupRecyclerView() {
         taskAdapter = TaskAdapter {
-            val action = MainFragmentDirections.actionMainFragmentToSelectedTaskFragment(it)
+            val action = MainFragmentDirections.actionMainFragmentToTaskFragment(it)
             findNavController().navigate(action)
         }
         viewLifecycleOwner.lifecycleScope.launch {
